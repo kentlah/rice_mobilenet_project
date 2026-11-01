@@ -1,0 +1,7 @@
+{
+  "seed": 42,
+  "best_epoch": 40,
+  "epochs_run": 48,
+  "seconds": 4632.435186499963,
+  "test_evaluated": false
+}

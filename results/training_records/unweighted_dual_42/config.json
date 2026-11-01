@@ -1,0 +1,47 @@
+{
+  "command": "train",
+  "data": "./Dhan-Shomadhan",
+  "manifest": null,
+  "run": "unweighted_dual_42",
+  "head": "paper",
+  "seeds": [
+    42
+  ],
+  "epochs": 50,
+  "patience": 8,
+  "batch_size": 16,
+  "lr": 0.0001,
+  "dropout": 0.5,
+  "threads": 4,
+  "no_augment": false,
+  "class_weighted": false,
+  "validation_only": true,
+  "classes": [
+    "Brown Spot",
+    "Leaf Scald",
+    "Rice Blast",
+    "Rice Tungro",
+    "Sheath Blight"
+  ],
+  "split_proportions": [
+    0.6,
+    0.2,
+    0.2
+  ],
+  "versions": {
+    "torch": "2.14.1+cpu",
+    "torchvision": "0.29.1+cpu",
+    "numpy": "2.3.5",
+    "Pillow": "12.3.0",
+    "scikit-learn": "1.8.0",
+    "matplotlib": "3.10.8"
+  },
+  "checkpoint_rules": {
+    "best.pt": "minimum unweighted validation cross entropy",
+    "best_macro_f1.pt": "maximum mixed validation macro F1; earliest epoch wins ties"
+  },
+  "stopping_rule": "patience on minimum unweighted validation cross entropy",
+  "weights_sha256": "b03531047ffacf1e2488318dcd2aba1126cde36e3bfe1aa5cb07700aeeee9889",
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "dataset_inventory_sha256": "31be080fc8d68714b218435fe08dff0fd5dbd35b8f6d1a05eea7fb4018e63a25"
+}

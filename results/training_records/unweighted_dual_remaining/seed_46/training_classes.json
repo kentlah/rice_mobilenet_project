@@ -1,0 +1,18 @@
+{
+  "classes": [
+    "Brown Spot",
+    "Leaf Scald",
+    "Rice Blast",
+    "Rice Tungro",
+    "Sheath Blight"
+  ],
+  "counts": [
+    84,
+    130,
+    163,
+    117,
+    169
+  ],
+  "weights": null,
+  "formula": "unweighted"
+}

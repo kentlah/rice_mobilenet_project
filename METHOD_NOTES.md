@@ -2,6 +2,25 @@
 
 Source: uploaded Altabaji et al. (2024), particularly Section III.E, Tables 1, 6 and 8, experimental setup and Section V. This is an adapted reproduction, not an exact numerical replication.
 
+## Final checkpoint-selection update
+
+The original implementation used minimum validation cross-entropy for
+checkpoint selection. The final experiment saves two checkpoints independently:
+
+- `best.pt`: minimum unweighted validation cross-entropy.
+- `best_macro_f1.pt`: maximum mixed-validation macro F1, retaining the
+  earliest epoch when values tie.
+
+Early stopping uses validation loss with patience eight, regardless of
+which checkpoint is selected for evaluation.
+
+The final reported results use the unweighted model and
+`best_macro_f1.pt`, evaluated across seeds 42–46 using `evaluate-saved`.
+Descriptions of minimum-loss selection below refer to the original baseline.
+
+Class weighting was explored using training-class counts and compared using
+validation results. It was not retained for the final configuration.
+
 | Item | Paper | Project |
 |---|---|---|
 | Dataset | 2,658 Kaggle rice images; Brown Spot, Hispa, Leaf Blast, Healthy | Assignment's Dhan-Shomadhan, five diseased classes and two backgrounds |

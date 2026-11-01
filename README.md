@@ -2,6 +2,98 @@
 
 This is a runnable **adapted reproduction of the frozen MobileNetV2 experiment** in Altabaji et al., *Comparative Analysis of Transfer Learning, LeafNet, and Modified LeafNet Models for Accurate Rice Leaf Diseases Classification*, IEEE Access 12, 36622–36635, 2024, DOI: 10.1109/ACCESS.2024.3373000. It does not reproduce all four experiments or promise the paper's accuracy on a different dataset.
 
+## Final reported experiment
+
+The final reported MobileNetV2 experiment uses the paper-style classifier,
+unweighted training, and the checkpoint with the highest mixed-validation
+macro F1. Early stopping remains based on unweighted validation loss.
+
+The `paper_50` commands later in this README describe the earlier
+minimum-validation-loss baseline. They do not reproduce the final
+macro-F1-selected results below.
+
+### Reported test results
+
+Values are means ± sample standard deviations across seeds 42–46.
+Accuracy SD is expressed in percentage points.
+
+| Test background | Accuracy (%) | Macro F1 |
+|---|---:|---:|
+| White | 64.81 ± 3.83 | 0.551 ± 0.051 |
+| Field | 48.24 ± 8.41 | 0.417 ± 0.098 |
+| Combined | 59.73 ± 5.08 | 0.518 ± 0.060 |
+
+The code calls the combined scenario `mixed`.
+
+The source dataset contains 1,106 images: 769 white-background and
+337 field-background images. Each final split contains 663 training,
+221 validation and 222 test images.
+
+Published dataset: https://doi.org/10.17632/znsxdctwtt.1
+Use the assignment dataset copy and preserve its original directory structure.
+
+### Reproduce from scratch
+
+Complete the installation, dataset audit and pretrained-weight download
+described below first. Then run these commands on a clean working copy:
+
+```powershell
+.\.venv\Scripts\python.exe group_name.py train --run unweighted_dual_42 --head paper --seeds 42 --epochs 50 --patience 8 --threads 4 --validation-only
+
+.\.venv\Scripts\python.exe group_name.py train --run unweighted_dual_remaining --head paper --seeds 43 44 45 46 --epochs 50 --patience 8 --threads 4 --validation-only
+
+.\.venv\Scripts\python.exe group_name.py evaluate-saved --runs unweighted_dual_42 unweighted_dual_remaining --output final_unweighted_macro_f1 --checkpoint-choice macro-f1 --expected-weighting unweighted --threads 4 --check-only
+
+.\.venv\Scripts\python.exe group_name.py evaluate-saved --runs unweighted_dual_42 unweighted_dual_remaining --output final_unweighted_macro_f1 --checkpoint-choice macro-f1 --expected-weighting unweighted --threads 4
+```
+
+The training commands save both checkpoint criteria without evaluating test
+data. The evaluation commands explicitly select `best_macro_f1.pt`.
+
+The evaluator generates the five-run summaries directly; do not use
+`summarize --run paper_50` to obtain the final reported results.
+
+### Existing completed experiments
+
+Do not rerun training over completed run directories.
+
+If the training runs already exist but final evaluation has not been
+performed, run only the two `evaluate-saved` commands.
+
+If the final evaluation directory already exists, read its outputs instead.
+The evaluator refuses to overwrite it, including in check-only mode.
+
+Generated final outputs are stored at:
+
+`Dhan-Shomadhan/_mobilenet/evaluations/final_unweighted_macro_f1/`
+
+### Published evidence
+
+`results/final_unweighted_macro_f1/` contains the original final summaries,
+per-seed metrics, predictions and evaluation provenance.
+
+`results/training_records/` contains training configurations, saved split
+allocations and checkpoint-selection records.
+
+These files document the completed experiment. They do not contain the
+dataset, pretrained weights or trained checkpoints. Reproducing predictions
+without retraining requires the original trained checkpoints, which are not
+distributed in this repository.
+
+### Limitations
+
+Original minimum-validation-loss baseline test results were inspected during
+development. The final evaluation must therefore not be described as an
+untouched holdout.
+
+The five random splits overlap, exact hashing does not detect related
+photographs of the same leaf, and results have not been validated on an
+independent field dataset.
+
+Random seeds and deterministic PyTorch algorithms support repeatability.
+Identical numerical results across different platforms or package versions
+are not guaranteed.
+
 ## 1. Project setup (Windows PowerShell)
 
 Install Python **3.12** from https://www.python.org/downloads/ if necessary. Extract this project into a normal writable directory, for example `Documents\rice-project`. Open PowerShell in that directory. Use the virtual-environment interpreter directly; activation is unnecessary.
@@ -131,4 +223,4 @@ Before final experiments, freeze package versions with:
 
 Document the exact used versions/install commands and all changes to the paper in the report. Config files capture versions too. Keep development files and outputs for your group; the Moodle submission must contain **only** `group_name.py` and `group_name.pdf` inside `group_name.zip` (replace the placeholder with your group name). Do not include images, weights, run directories or this development ZIP. Incorporate the setup/reproduction commands into the report's two-page user manual, including how to recreate the weights and generated directories.
 
-See `METHOD_NOTES.md` for the paper-to-code mapping and `VALIDATION.md` for development checks. No real assignment-dataset result is supplied with this project.
+See `METHOD_NOTES.md` for the paper-to-code mapping and `VALIDATION.md` for development checks. Real assignment-dataset results and provenance are provided under results/. See “Final reported experiment” for the procedure used to generate them.

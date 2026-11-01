@@ -1,0 +1,16 @@
+{
+  "seed": 42,
+  "epochs_run": 48,
+  "minimum_loss": {
+    "checkpoint": "best.pt",
+    "epoch": 40,
+    "value": 1.0462876027323542
+  },
+  "maximum_macro_f1": {
+    "checkpoint": "best_macro_f1.pt",
+    "epoch": 38,
+    "value": 0.4990698338862966
+  },
+  "early_stopping_metric": "unweighted validation cross entropy",
+  "test_checkpoint": null
+}

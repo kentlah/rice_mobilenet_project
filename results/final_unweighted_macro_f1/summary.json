@@ -1,0 +1,26 @@
+[
+  {
+    "scenario": "white",
+    "runs": 5,
+    "accuracy_mean": 0.648051948051948,
+    "accuracy_sample_sd": 0.038251107727332825,
+    "macro_f1_mean": 0.5511954984652234,
+    "macro_f1_sample_sd": 0.05130234503590038
+  },
+  {
+    "scenario": "field",
+    "runs": 5,
+    "accuracy_mean": 0.48235294117647054,
+    "accuracy_sample_sd": 0.08409399091468117,
+    "macro_f1_mean": 0.4167729430303842,
+    "macro_f1_sample_sd": 0.09772782806048474
+  },
+  {
+    "scenario": "mixed",
+    "runs": 5,
+    "accuracy_mean": 0.5972972972972974,
+    "accuracy_sample_sd": 0.0508231088561021,
+    "macro_f1_mean": 0.5181304562945732,
+    "macro_f1_sample_sd": 0.06008827479146551
+  }
+]

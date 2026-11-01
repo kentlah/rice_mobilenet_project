@@ -18,3 +18,30 @@ Completed checks:
 - Generated confusion plot visually inspected for labels and legibility.
 
 Synthetic noise images only validate execution. Their accuracy is meaningless and is not an assignment result. No Dhan-Shomadhan images were available to the implementation tests. Training time on the development CPU is not an estimate for the user's laptop. The real dataset folder names/counts, related-image leakage risk, convergence, performance and laptop runtime must still be checked.
+
+
+## Final real-dataset experiment
+
+The earlier checks above describe synthetic-data development validation,
+not the final assignment results.
+
+The completed Dhan-Shomadhan experiment used:
+
+- 1,106 source images across five disease classes and two backgrounds.
+- Seeds 42–46 with jointly stratified 60/20/20 splits.
+- Frozen MobileNetV2 features, including batch-normalisation statistics.
+- Paper-style classifier, batch size 16 and Adam learning rate 0.0001.
+- Up to 50 epochs, with patience eight on validation loss.
+- Unweighted training and final checkpoint selection by validation macro F1.
+
+Original configurations, split allocations, training histories and
+checkpoint-selection records are published under `results/training_records/`.
+
+Final test metrics and provenance are published under
+`results/final_unweighted_macro_f1/`.
+
+These are records of the original completed experiment; publishing this
+repository did not involve a fresh five-run training reproduction.
+
+The original minimum-loss baseline test results were inspected during
+development. The final evaluation is therefore not an untouched holdout.
