@@ -1,0 +1,25 @@
+﻿
+# Local Python environments
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Dataset and generated training outputs
+Dhan-Shomadhan/
+_mobilenet/
+runs/
+weights/
+checkpoints/
+*.pt
+*.pth
+*.onnx
+
+# Local credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+group_name_BU.py
+group_name_before_final_evaluation.py

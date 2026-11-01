@@ -1,0 +1,5 @@
+# Install torch + torchvision together using the CPU command in README first.
+numpy==2.3.5
+matplotlib==3.10.8
+scikit-learn==1.8.0
+Pillow==12.3.0
